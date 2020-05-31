@@ -1,0 +1,7 @@
+{
+  "name": "ctxtApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
