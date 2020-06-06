@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button autoHide=false defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Inicio de sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="flip-container" #flipcontainer>
+    <div class=flipper>
+      <div class=front>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Inicia sesión</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form [formGroup]="loginForm" (ngSubmit)="register()">
+              <ion-item lines="none">
+                <ion-label position="stacked">Email</ion-label>
+                <ion-input type="email" placeholder="email@example.com" formControlName="email"></ion-input>
+              </ion-item>
+
+              <ion-item lines="none">
+                <ion-label position="stacked">Contraseña</ion-label>
+                <ion-input type="password" formControlName="password"></ion-input>
+              </ion-item>
+
+              <ion-button expand="block" type=submit color=success fill=outline
+                class="ion-padding-horizontal ion-margin-vertical" (click)=login() [disabled]=!loginForm.valid>
+                Entrar
+              </ion-button>
+
+              <ion-button expand="block" color=black fill=outline class="ion-padding-horizontal ion-margin-vertical"
+                (click)=toggleRegister()>
+                ¡Suscríbete!
+              </ion-button>
+            </form>
+          </ion-card-content>
+        </ion-card>
+
+
+      </div>
+
+      <div class=back>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Crear cuenta</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form [formGroup]="registerForm" (ngSubmit)="register()">
+              <ion-item lines="none">
+                <ion-label position="stacked">Email</ion-label>
+                <ion-input type="email" placeholder="Aquí tu email" formControlName="email"></ion-input>
+              </ion-item>
+
+              <ion-item lines="none">
+                <ion-label position="stacked">Nombre</ion-label>
+                <ion-input placeholder="Aqui tu nickname o Nombre" formControlName="name"></ion-input>
+              </ion-item>
+
+              <ion-item lines="none">
+                <ion-label position="stacked">Contraseña</ion-label>
+                <ion-input type="password" formControlName="Introduce tu contraseña"></ion-input>
+              </ion-item>
+
+              <ion-button expand="block" type=submit class="ion-padding-horizontal ion-margin-vertical"
+                [disabled]="!registerForm.valid">
+                Registrar
+              </ion-button>
+
+              <ion-button expand="block" color=secondary fill=outline class="ion-padding-horizontal ion-margin-vertical"
+                (click)=toggleRegister()>
+                <ion-icon slot="start" name="arrow-back"></ion-icon>
+              </ion-button>
+            </form>
+          </ion-card-content>
+        </ion-card>
+
+      </div>
+    </div>
+  </div>
+
+</ion-content>

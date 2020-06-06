@@ -1,0 +1,22 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content>
+  <ion-toolbar>
+    <ion-avatar slot="start">
+      <img [src]="" />
+    </ion-avatar>
+    <ion-title>{{!!article ? article.titulo : ''}}</ion-title>
+  </ion-toolbar>
+  <ion-img [src]="article?.imagen"></ion-img>
+  <ion-text>
+    <h1>{{!!article ? article.entradilla : ''}}</h1>
+  </ion-text>
+
+  <ion-text>
+    <h2>{{!!article ? article.cuerpo : ''}}</h2>
+  </ion-text>
+
+  <!-- Aquí mencionar al autor y demáses -->
+</ion-content>
