@@ -35,12 +35,13 @@
   </ion-chip>
 </ion-list>
 
-<ion-select multiple="true" appNoArrow (ionChange)="addTags($event)" [hidden]=true>
+<ion-select multiple="true" (ionChange)="addTags($event)" cancel-text="Cancelar" ok-text="Ok" [hidden]=true>
   <!-- Este componente nunca debe ver la luz del sol... es demasiado feo -->
   <ion-select-option [value]="categorias.contexto">{{categorias.contexto.nombre}}</ion-select-option>
   <ion-select-option [value]="categorias.firma">{{categorias.firma.nombre}}</ion-select-option>
   <ion-select-option [value]="categorias.ministerio">{{categorias.ministerio.nombre}}</ion-select-option>
   <ion-select-option [value]="categorias.editorial">{{categorias.editorial.nombre}}</ion-select-option>
+  <ion-select-option [value]="categorias.entrevista">{{categorias.entrevista.nombre}}</ion-select-option>
   <ion-select-option [value]="categorias.crisisEcosocial">{{categorias.crisisEcosocial.nombre}}
   </ion-select-option>
   <ion-select-option [value]="categorias.feminismo">{{categorias.feminismo.nombre}}</ion-select-option>
@@ -50,17 +51,22 @@
   <ion-select-option [value]="categorias.coronavirus">{{categorias.coronavirus.nombre}}</ion-select-option>
 </ion-select>
 
-
 <ion-content>
-  <ion-refresher slot="fixed">
-    <!--  (ionRefresh)="doRefresh($event)" -->
+  <!-- fab placed to the bottom end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" [hidden]="true">
+    <!-- Escondemos este botón para los no lectores. -->
+    <ion-fab-button>
+      <ion-icon name="pencil-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-refresher slot="fixed" (ionRefresh)="loadNewest($event)">
     <!-- Aquí incluir función que refresque el contenido  -->
     <ion-refresher-content pullingIcon="chevron-down-circle-outline" refreshingSpinner="circles"
       refreshingText="Comprobando nuevos artículos..."></ion-refresher-content>
   </ion-refresher>
 
   <!-- Aquí el contenido de pull to refresh -->
-  <ion-card *ngFor="let art of articulosFiltrados">
+  <ion-card *ngFor="let art of articulosFiltrados | async">
     <div #mainContent (click)="navigateToNew(art)">
       <ion-item>
         <!-- Esto es cuestionable -->
@@ -86,7 +92,8 @@
       <ion-col class=center-align>
         <ion-button color=dark>
           <ion-icon slot="start" name="chatbubble-outline"></ion-icon>
-          {{art.comentarios.length}} Comentarios
+          0 Comentarios
+          <!-- {{art.comentarios.length}} Transformar esto en otra petición. -->
         </ion-button>
       </ion-col>
       <ion-col class=center-align>
@@ -104,11 +111,12 @@
   </ion-card>
 
 
-  <ion-infinite-scroll threshold="100px">
-    <!-- (ionInfinite)="loadData($event)" -->
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)">
+    <!--  -->
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más artículos...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
+
 </ion-content>
 
 <ion-footer>

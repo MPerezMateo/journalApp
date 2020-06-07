@@ -31,6 +31,7 @@
     "cordova-plugin-x-socialsharing": "^5.6.8",
     "es6-promise-plugin": "^4.2.2",
     "firebase": "^7.14.6",
+    "ngx-pinch-zoom": "^2.4.4",
     "rxjs": "~6.5.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

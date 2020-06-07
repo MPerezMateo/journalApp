@@ -10,17 +10,17 @@
 <ion-content>
   <!-- Aquí van los ajustes: -->
   <ion-list>
-    <ion-item>
+    <ion-item routerDirection="root" routerLink="/home/settings/temas">
       <ion-icon slot="start" name="star-outline"></ion-icon>
       <ion-label>Temas Preferidos</ion-label>
     </ion-item>
 
-    <ion-item>
+    <ion-item routerDirection="root" routerLink="/home/settings/stats">
       <ion-icon slot="start" name="stats-chart"></ion-icon>
       <ion-label>Mis estadísticas</ion-label>
     </ion-item>
 
-    <ion-item>
+    <ion-item routerDirection="root" routerLink="/home/settings/perfil">
       <ion-icon slot="start" name="person"></ion-icon>
       <ion-label>Mi Perfil</ion-label>
     </ion-item>
@@ -28,92 +28,21 @@
     <ion-item>
       <ion-icon slot="start" [name]="notificaciones ? 'notifications' : 'notifications-off'"></ion-icon>
       <ion-label>Permitir Notificaciones</ion-label>
-      <ion-toggle [(ngModel)]="notificaciones"></ion-toggle>
+      <ion-toggle [(ngModel)]="notificaciones" (ionChange)="notifToast($event)"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon slot="start" [name]="nightMode ? 'moon' : 'sunny'"></ion-icon>
+      <ion-label>Modo Oscuro</ion-label>
+      <ion-toggle [(ngModel)]="nightMode" (ionChange)="nightToast($event)"></ion-toggle><!--    -->
+      <!-- Otro activar Modo noche -->
+    </ion-item>
+
+    <ion-item routerLink="/home/settings/fuente">
+      <ion-icon slot="start" name="text-outline"></ion-icon>
+      <ion-label>Tamaño de Letra</ion-label>
+      <!-- Cambiar tamaño de letra -->
     </ion-item>
   </ion-list>
 
-  <!-- Toggles in a List -->
-  <ion-list>
-    <ion-list-header>Characters</ion-list-header>
-    <ion-item>
-      <ion-label>Jon Snow</ion-label>
-      <ion-checkbox color="primary" checked slot="start"></ion-checkbox>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox color="dark" checked slot="start"></ion-checkbox>
-      <ion-label>Daenerys Targaryen</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox disabled slot="start"></ion-checkbox>
-      <ion-label>Arya Stark</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox color="secondary" slot="start"></ion-checkbox>
-      <ion-label>Tyrion Lannister</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox color="danger" checked slot="start"></ion-checkbox>
-      <ion-label>Sansa Stark</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox color="primary" slot="start"></ion-checkbox>
-      <ion-label>Khal Drogo</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox color="tertiary" checked slot="start"></ion-checkbox>
-      <ion-label>Cersei Lannister</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox color="medium" checked slot="start"></ion-checkbox>
-      <ion-label>Stannis Baratheon</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox color="primary" disabled slot="start"></ion-checkbox>
-      <ion-label>Petyr Baelish</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox color="dark" checked slot="start"></ion-checkbox>
-      <ion-label>Hodor</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox color="secondary" checked slot="start"></ion-checkbox>
-      <ion-label>Catelyn Stark</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox color="primary" slot="start"></ion-checkbox>
-      <ion-label>Bronn</ion-label>
-    </ion-item>
-  </ion-list>
-
-
-  <div>
-    <!-- If eres desarrollador  -->
-    <ion-list>
-      <ion-list-header>Badges</ion-list-header>
-      <ion-item>
-        <ion-label>Seguidores</ion-label>
-        <ion-badge color=blue slot="end">22k</ion-badge>
-      </ion-item>
-      <ion-item>
-        <ion-label>Likes a mis artículos</ion-label>
-        <ion-badge color="blue" slot="end">118k</ion-badge>
-      </ion-item>
-      <ion-item>
-        <ion-label>Comentarios en mis artículos</ion-label>
-        <ion-badge color="green" slot="end">34k</ion-badge>
-      </ion-item>
-      <ion-item>
-        <ion-label>Número de artículos</ion-label>
-        <ion-badge color="orange" slot="end">80</ion-badge>
-      </ion-item>
-      <ion-item>
-        <ion-label>Talleres en los que has participado</ion-label>
-        <ion-badge color="danger" slot="end">1000</ion-badge>
-      </ion-item>
-      <ion-item>
-        <ion-label>Alumnos en tus talleres</ion-label>
-        <ion-badge color="light" slot="end">24</ion-badge>
-      </ion-item>
-    </ion-list>
-  </div>
 </ion-content>

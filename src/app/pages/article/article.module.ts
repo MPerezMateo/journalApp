@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { ArticlePageRoutingModule } from './article-routing.module';
 
 import { ArticlePage } from './article.page';
+import { PinchZoomModule } from 'ngx-pinch-zoom';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    PinchZoomModule,
     ArticlePageRoutingModule
   ],
   declarations: [ArticlePage]
 })
-export class ArticlePageModule {}
+export class ArticlePageModule { }

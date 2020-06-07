@@ -5,7 +5,7 @@
 <ion-content>
   <ion-toolbar>
     <ion-avatar slot="start">
-      <img [src]="article.autor.imagen ? article.autor.imagen : 'assets/images/no-profile-picture.png'" />
+      <img [src]="autor&&autor.imagen ? autor.imagen : 'assets/images/no-profile-picture.png'" />
     </ion-avatar>
     <ion-title>{{!!article ? article.titulo : ''}}</ion-title>
   </ion-toolbar>
@@ -14,9 +14,18 @@
     <h1>{{!!article ? article.entradilla : ''}}</h1>
   </ion-text>
 
-  <ion-textarea readonly disabled>
-    {{!!article ? article.cuerpo : ''}}
-  </ion-textarea>
-
+  <pinch-zoom backgroundColor="rgba(0,0,0,0)" (events)="zooming($event)">
+    <ion-textarea readonly disabled color=dark>
+      {{!!article ? article.cuerpo : ''}}
+    </ion-textarea>
+  </pinch-zoom>
   <!-- Aquí mencionar al autor y demáses -->
+
+  <ion-card>
+    <!-- Hacer el ngfor de comentarios -->
+    <ion-card-header>
+      <ion-card-subtitle>Comentario de ejemplo</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>Un artículo muy bueno, trata sobre tal y cual</ion-card-content>
+  </ion-card>
 </ion-content>
