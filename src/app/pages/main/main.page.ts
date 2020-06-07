@@ -81,9 +81,6 @@ export class MainPage implements OnInit {
 
 
   getItems(ev: any) {
-    // Reset items back to all of the items
-    //this.initializeItems();
-
     // set val to the value of the searchbar
     const val = ev.target.value;
     //console.log("value from searchBar ", val.trim())
@@ -91,7 +88,7 @@ export class MainPage implements OnInit {
     if (val && val.trim() != '') {
       this.articulosFiltrados = this.articulos.filter(item => {
         console.log("Filtering item:", item.titulo.length)
-        return item.titulo.toLowerCase().indexOf(val.toLowerCase()) > -1 || item.entradilla.toLowerCase().indexOf(val.toLowerCase()) > -1 // || item.autor.toLowerCase().indexOf(val.toLowerCase()) > -1 // En un futuro cuando añadamos autores
+        return item.titulo.toLowerCase().indexOf(val.toLowerCase()) > -1 || item.entradilla.toLowerCase().indexOf(val.toLowerCase()) > -1 || item.autor.nombre.toLowerCase().indexOf(val.toLowerCase()) > -1 // En un futuro cuando añadamos autores
       })
       console.log("Art filtrados: ", this.articulosFiltrados)
       this.articulosFiltrados.forEach(art => console.log(art.titulo))
@@ -99,10 +96,9 @@ export class MainPage implements OnInit {
   }
 
   addTags(event) {
-    console.log("Tags pasados antes de la seleccion:", event.detail.value)
     this.tags = event.detail.value
-    this.articulosFiltrados = this.articulosFiltrados.filter(art => { art.categorias.some(cat => { this.tags.includes(cat.nombre); console.log("¿Hay una categoría coindicente?", art.categorias, cat.nombre) }) })
-    console.log("Después de la seleccion de tags:", this.articulosFiltrados)
+    // Loquisimo pero funciona **¡Ojo los returns, son importantes!**
+    this.articulosFiltrados = this.articulosFiltrados.filter(art => !!art.categorias.some(cat => { return this.tags.map(tap => tap.nombre).some(nombre => nombre == cat.nombre) }))
   }
 
   removeTag(tag) {
@@ -110,7 +106,7 @@ export class MainPage implements OnInit {
     if (this.tags.length == 0) {
       this.articulosFiltrados = this.articulos
     } else {
-      this.articulosFiltrados = this.articulosFiltrados.filter(art => { art.categorias.some(cat => { this.tags.includes(cat.nombre); console.log("¿Hay una categoría coindicente?", art.categorias) }) })
+      //this.articulosFiltrados = this.articulosFiltrados.filter(art => { art.categorias.some(cat => { this.tags.includes(cat.nombre); console.log("¿Hay una categoría coindicente?", art.categorias) }) })
     }
   }
 

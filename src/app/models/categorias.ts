@@ -12,7 +12,7 @@ export class Categorias {
   static readonly coronavirus = new Categorias('coronavirus', 'flask-outline', '');
 
   // private to disallow creating other instances of this type
-  private constructor(private readonly nombre: string, public readonly icono: string, public readonly color: string) {
+  private constructor(public readonly nombre: string, public readonly icono: string, public readonly color: string) {
   }
 
   toString() {

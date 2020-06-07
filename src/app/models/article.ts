@@ -10,5 +10,5 @@ export interface Artículo {
   tipo: string // En un futuro un enum,
   likes: number,
   comentarios: any[], // En un futuro un interfaz de comentarios
-  categorias?: any//Categorias[]
+  categorias?: Categorias[]//
 }
