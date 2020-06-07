@@ -25,7 +25,7 @@
 
               <ion-item lines="none">
                 <ion-label position="stacked">Contraseña</ion-label>
-                <ion-input type="password" formControlName="password"></ion-input>
+                <ion-input type="password" placeholder="Introduce tu contraseña" formControlName="password"></ion-input>
               </ion-item>
 
               <ion-button expand="block" type=submit color=success fill=outline
@@ -63,7 +63,8 @@
 
               <ion-item lines="none">
                 <ion-label position="stacked">Contraseña</ion-label>
-                <ion-input type="password" formControlName="Introduce tu contraseña"></ion-input>
+                <ion-input type="password" placeholder="Introduce tu contraseña" formControlName="password">
+                </ion-input>
               </ion-item>
 
               <ion-button expand="block" type=submit class="ion-padding-horizontal ion-margin-vertical"
@@ -74,6 +75,7 @@
               <ion-button expand="block" color=secondary fill=outline class="ion-padding-horizontal ion-margin-vertical"
                 (click)=toggleRegister()>
                 <ion-icon slot="start" name="arrow-back"></ion-icon>
+                <ion-label>Volver a Inicio de Sesión</ion-label>
               </ion-button>
             </form>
           </ion-card-content>

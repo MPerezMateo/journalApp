@@ -5,7 +5,7 @@
 <ion-content>
   <ion-toolbar>
     <ion-avatar slot="start">
-      <img [src]="" />
+      <img [src]="article.autor.imagen ? article.autor.imagen : 'assets/images/no-profile-picture.png'" />
     </ion-avatar>
     <ion-title>{{!!article ? article.titulo : ''}}</ion-title>
   </ion-toolbar>
@@ -14,9 +14,9 @@
     <h1>{{!!article ? article.entradilla : ''}}</h1>
   </ion-text>
 
-  <ion-text>
-    <h2>{{!!article ? article.cuerpo : ''}}</h2>
-  </ion-text>
+  <ion-textarea readonly disabled>
+    {{!!article ? article.cuerpo : ''}}
+  </ion-textarea>
 
   <!-- Aquí mencionar al autor y demáses -->
 </ion-content>

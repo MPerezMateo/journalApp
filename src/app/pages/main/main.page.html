@@ -21,44 +21,94 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-item>
+  <ion-searchbar animated placeholder="Busca un artículo" (ionInput)="getItems($event)">
+  </ion-searchbar>
+  <ion-icon slot=end name="filter-sharp" (click)="openSelect()"></ion-icon>
+</ion-item>
+
+<ion-list *ngIf="tags.length>0">
+  <ion-chip *ngFor="let tag of tags" [color]="tag.color">
+    <ion-icon [name]="tag.icono"></ion-icon>
+    <ion-label [color]="tag.color">{{tag.nombre}}</ion-label>
+    <ion-icon class=removeTag name="close-circle-outline" (click)=removeTag(tag)></ion-icon>
+  </ion-chip>
+</ion-list>
+
+<ion-select multiple="true" appNoArrow (ionChange)="addTags($event)" [hidden]=true>
+  <!-- Este componente nunca debe ver la luz del sol... es demasiado feo -->
+  <ion-select-option [value]="categorias.contexto">{{categorias.contexto.nombre}}</ion-select-option>
+  <ion-select-option [value]="categorias.firma">{{categorias.firma.nombre}}</ion-select-option>
+  <ion-select-option [value]="categorias.ministerio">{{categorias.ministerio.nombre}}</ion-select-option>
+  <ion-select-option [value]="categorias.editorial">{{categorias.editorial.nombre}}</ion-select-option>
+  <ion-select-option [value]="categorias.crisisEcosocial">{{categorias.crisisEcosocial.nombre}}
+  </ion-select-option>
+  <ion-select-option [value]="categorias.feminismo">{{categorias.feminismo.nombre}}</ion-select-option>
+  <ion-select-option [value]="categorias.deporte">{{categorias.deporte.nombre}}</ion-select-option>
+  <ion-select-option [value]="categorias.vineta">{{categorias.vineta.nombre}}</ion-select-option>
+  <ion-select-option [value]="categorias.ctxtCat">{{categorias.ctxtCat.nombre}}</ion-select-option>
+  <ion-select-option [value]="categorias.coronavirus">{{categorias.coronavirus.nombre}}</ion-select-option>
+</ion-select>
+
+
 <ion-content>
+  <ion-refresher slot="fixed">
+    <!--  (ionRefresh)="doRefresh($event)" -->
+    <!-- Aquí incluir función que refresque el contenido  -->
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" refreshingSpinner="circles"
+      refreshingText="Comprobando nuevos artículos..."></ion-refresher-content>
+  </ion-refresher>
 
-  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-
+  <!-- Aquí el contenido de pull to refresh -->
   <ion-card *ngFor="let art of articulosFiltrados">
     <div #mainContent (click)="navigateToNew(art)">
       <ion-item>
+        <!-- Esto es cuestionable -->
         <img [src]="art?.imagen">
-        <h2>{{art?.autor}}</h2>
-        <p>{{art.publishedDate}}</p>
+        <i-list>
+          <h2>{{art?.autor.nombre}}</h2>
+          <ion-datetime [value]="art?.publishedDate" disabled></ion-datetime>
+        </i-list>
       </ion-item>
 
-      <ion-card-content>
+      <ion-card-header>
         <p>{{art.titulo}}</p>
-      </ion-card-content>
+      </ion-card-header>
     </div>
 
     <ion-row>
-      <ion-col>
-        <button ion-button icon-start clear small (click)="giveLike(art)">
-          <ion-icon name="thumbs-up"></ion-icon>
-          <div>{{art.likes}} Likes</div>
-        </button>
+      <ion-col class=center-align>
+        <ion-button color=dark (click)="giveLike(art)">
+          <ion-icon slot="start" name="thumbs-up"></ion-icon>
+          {{art.likes}} Likes
+        </ion-button>
       </ion-col>
-      <ion-col>
-        <button ion-button icon-start clear small>
-          <ion-icon name="chatbubble-outline"></ion-icon>
-          <div>{{art.comentarios.length}} Commentarios</div>
-        </button>
+      <ion-col class=center-align>
+        <ion-button color=dark>
+          <ion-icon slot="start" name="chatbubble-outline"></ion-icon>
+          {{art.comentarios.length}} Comentarios
+        </ion-button>
       </ion-col>
-      <ion-col align-self-center text-center (click)="share()">
-        <ion-note>
+      <ion-col class=center-align>
+        <ion-button color=dark>
+          <ion-icon slot="start" name="share-social-outline"></ion-icon>
           Compartir
-        </ion-note>
+        </ion-button>
       </ion-col>
     </ion-row>
 
+    <ion-chip outline [color]="category.color" *ngFor="let category of art.categorias">
+      <ion-icon [name]="category.icono"></ion-icon>
+      <ion-label [color]="category.color!= '' ? category.color : primary">{{category.nombre}}</ion-label>
+    </ion-chip>
   </ion-card>
+
+
+  <ion-infinite-scroll threshold="100px">
+    <!-- (ionInfinite)="loadData($event)" -->
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más artículos...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
 
 <ion-footer>
