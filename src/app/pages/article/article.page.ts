@@ -13,20 +13,20 @@ export class ArticlePage implements OnInit {
   id: string
   article
   autor
-  constructor(private router: Router, private modalController: ModalController, private articleService: ArticleService, private userService: UserService) {
-    if (this.router.getCurrentNavigation().extras.state) {
-      this.id = this.router.getCurrentNavigation().extras.state.article
-      console.log("id: ", this.id)
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private modalController: ModalController, private articleService: ArticleService, private userService: UserService) {
+    this.activatedRoute.paramMap.subscribe(data => {
+      this.id = data.get('id')
       this.articleService.getOneArticle(this.id).then(result => {
         this.article = result.data()
         console.log("Artículo específico:", this.article)
       }).then(() => {
         this.userService.getUserByRef(this.article.autor).then(res => {
           if (res.data().nombre) this.autor = res.data()
-          console.log(this.autor)
+          console.log('autor', this.autor)
         })
       })
-    }
+    })
+
   }
 
   ngOnInit() {

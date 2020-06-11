@@ -67,14 +67,12 @@
 
   <!-- Aquí el contenido de pull to refresh -->
   <ion-card *ngFor="let art of articulosFiltrados | async">
-    <div #mainContent (click)="navigateToNew(art)">
+    <div #mainContent [routerLink]="['/article', art.id]">
       <ion-item>
         <!-- Esto es cuestionable -->
         <img [src]="art?.imagen">
-        <i-list>
-          <h2>{{art?.autor.nombre}}</h2>
-          <ion-datetime [value]="art?.publishedDate" disabled></ion-datetime>
-        </i-list>
+        <h2>{{art?.autor.nombre}}</h2>
+        <ion-datetime [value]="art?.publishedDate" disabled></ion-datetime>
       </ion-item>
 
       <ion-card-header>

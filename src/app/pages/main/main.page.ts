@@ -93,7 +93,9 @@ export class MainPage implements OnInit {
     if (this.tags.length == 0) {
       this.articulosFiltrados = this.articulos
     } else {
-      //this.articulosFiltrados = this.articulosFiltrados.filter(art => { art.categorias.some(cat => { this.tags.includes(cat.nombre); console.log("¿Hay una categoría coindicente?", art.categorias) }) })
+      this.articulosFiltrados = this.articulos.pipe(
+        map(artic => artic.filter(art => art.categorias.some(cat => { return this.tags.map(tap => tap.nombre).some(nombre => nombre == cat.nombre) })))
+      )
     }
   }
 

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Plugins } from '@capacitor/core';
+
+const { Browser } = Plugins;
 
 @Component({
   selector: 'app-home',
@@ -10,6 +13,10 @@ export class HomePage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  async goToSubscriptions() {
+    await Browser.open({ url: 'https://agora.ctxt.es/suscripciones/' });
   }
 
 }
