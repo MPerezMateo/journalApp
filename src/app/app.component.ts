@@ -34,9 +34,9 @@ export class AppComponent {
     if (nightmode == undefined) {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
       document.body.classList.toggle('dark')
-      console.log("prefered theme is dark? : ", prefersDark.matches)
+      //console.log("prefered theme is dark? : ", prefersDark.matches)
     } else {
-      console.log("prefered theme is dark? : ", nightmode)
+      //console.log("prefered theme is dark? : ", nightmode)
       if (nightmode) document.body.classList.add('dark')
       else document.body.classList.remove('dark')
     }

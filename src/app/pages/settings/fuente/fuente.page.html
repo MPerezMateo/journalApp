@@ -3,13 +3,39 @@
     <ion-buttons slot="start">
       <ion-back-button autoHide=false defaultHref="home/settings"></ion-back-button>
     </ion-buttons>
-    <ion-title>Fuente</ion-title>
+    <ion-title>Ajusta el tamaño de la letra</ion-title>
+    <ion-buttons slot="end" (click)="cambiar()">
+      <ion-button>
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-range min="0" max="100" dualKnobs="true" pin="true" snaps="true" step="1" ticks="true" value="0" color="primary"
-    (ionChange)="rangeChange($event)">
-  </ion-range>
+  <ion-list>
+    <ion-item>
+      <ion-range min="15" max="60" [value]="fontSize" pin color=dark (ionChange)="changeFont($event)">
+        <ion-icon slot="start" size="small" name="text-outline"></ion-icon>
+        <ion-icon slot="end" size="large" name="text-outline"></ion-icon>
+      </ion-range>
+    </ion-item>
 
+    <ion-item>
+      <ion-title class="ion-text-center">Texto de muestra:</ion-title>
+    </ion-item>
+
+    <ion-item>
+      <ion-textarea readonly disabled color=dark>
+        Texto de ejemplo, aquí debes ver si el tamaño del texto te parece adecuada para leer. Una vez leas este texto al
+        tamaño que consideres, pulsa confirmar para guardar los cambios. Texto de ejemplo, aquí debes ver si el tamaño
+        del texto te parece adecuada para leer. Una vez leas este texto al
+        tamaño que consideres, pulsa confirmar para guardar los cambios .Texto de ejemplo, aquí debes ver si el tamaño
+        del texto te parece adecuada para leer. Una vez leas este texto al
+        tamaño que consideres, pulsa confirmar para guardar los cambios .Texto de ejemplo, aquí debes ver si el tamaño
+        del texto te parece adecuada para leer. Una vez leas este texto al
+        tamaño que consideres, pulsa confirmar para guardar los cambios
+      </ion-textarea>
+    </ion-item>
+  </ion-list>
 </ion-content>

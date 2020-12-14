@@ -53,13 +53,14 @@ export class MainPage implements OnInit {
   }
 
   share() {
+    console.log("Sharing is caring")
     this.socialSharing.share() // Compartir por ejemplo la url al link original del artículo https://www.youtube.com/watch?v=n3zDuQaSyag
   }
 
   giveLike(art) {
     //this.articulos.find(a => a == art).likes++
     // giveLike debe ser una función que llame a la base de datos y consulte si se ha dado un like a este artículo desde esta cuenta o dispositivo, si se ha dado, no se puede dar más y se bloquea.
-    // en la base de datos, el like debe ir enlazado al uid, de tal forma que no permite dar mas de 1 like por uid
+    // Se accede al uid mediante el servicio de autenticación. 
   }
 
   getItems(ev: any) {
@@ -116,4 +117,8 @@ export class MainPage implements OnInit {
       ev.target.complete();
     }, 2000);
   } // función que se llama con el dragup (scrollup )
+
+  resetArticles() {
+    this.articulosFiltrados = this.articulos
+  }
 }

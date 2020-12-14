@@ -4,10 +4,11 @@
       <ion-back-button autoHide=false defaultHref="home/settings"></ion-back-button>
     </ion-buttons>
     <ion-title>Temas</ion-title>
-    <ion-button slot="end" (click)="cambiar()">
-      <ion-title color=dark>Confirmar</ion-title>
-      <ion-icon color=dark slot="end" name="checkmark-circle-outline"></ion-icon>
-    </ion-button>
+    <ion-buttons slot="end" (click)="cambiar()">
+      <ion-button>
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

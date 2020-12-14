@@ -8,7 +8,7 @@ export interface Artículo {
   publishedDate: string
   imagen: string
   tipo: string // En un futuro un enum,
-  likes: number,
+  likes: string[] // Es una matriz con los ids de los usuarios que han dado like. Si se consulta la cantidad es con .length
   comentarios: any[], // En un futuro un interfaz de comentarios
   categorias?: Categorias[]//
 }

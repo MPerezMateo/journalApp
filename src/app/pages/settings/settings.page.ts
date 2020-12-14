@@ -11,12 +11,16 @@ import { DataService } from 'src/app/services/data.service';
 export class SettingsPage implements OnInit {
   renderer: Renderer2
   nightMode: boolean  // debemos inicializarlo desde storage
-  notificaciones: boolean = false // Activadas o desactivadas, en un futuro estará coordinado con la base de datos y/o local storage
+  notificaciones: boolean // Activadas o desactivadas, en un futuro estará coordinado con la base de datos y/o local storage
   constructor(private rendererFactory: RendererFactory2, @Inject(DOCUMENT) private document: Document, private toastController: ToastController, private dataService: DataService) {
     this.renderer = rendererFactory.createRenderer(null, null);
     this.dataService.getNightMode().then(res => {
-      if (res) this.nightMode = true
+      if (res) this.nightMode = res
       else this.nightMode = false
+    })
+    this.dataService.getAllowNotif().then(res => {
+      if (res) this.notificaciones = res
+      else this.notificaciones = false
     })
   }
 
@@ -35,6 +39,7 @@ export class SettingsPage implements OnInit {
 
   async notifToast(event) {
     // Aquí hay que comunicarse con la base de datos para que las funcitons globals puedan preguntar por estas 
+    this.dataService.setAllowNotif(event.detail.checked)
     const toast = await this.toastController.create({
       message: this.notificaciones ? 'A partir de ahora recibirás notificaciones' : 'A partir de ahora no recibirás notificaciones',
       duration: 1500

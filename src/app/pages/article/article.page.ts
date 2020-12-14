@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Data } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ArticleService } from 'src/app/services/article.service';
 import { UserService } from 'src/app/services/user.service';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-article',
@@ -13,7 +14,8 @@ export class ArticlePage implements OnInit {
   id: string
   article
   autor
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private modalController: ModalController, private articleService: ArticleService, private userService: UserService) {
+  fontSize: number
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private modalController: ModalController, private articleService: ArticleService, private userService: UserService, private dataService: DataService) {
     this.activatedRoute.paramMap.subscribe(data => {
       this.id = data.get('id')
       this.articleService.getOneArticle(this.id).then(result => {
@@ -27,6 +29,10 @@ export class ArticlePage implements OnInit {
       })
     })
 
+    this.dataService.getFontSize().then(res => {
+      this.fontSize = res
+      document.getElementsByTagName("ion-textarea")[0].style.fontSize = `${this.fontSize}px`
+    })
   }
 
   ngOnInit() {

@@ -22,7 +22,7 @@
 </ion-header>
 
 <ion-item>
-  <ion-searchbar animated placeholder="Busca un artículo" (ionInput)="getItems($event)">
+  <ion-searchbar animated placeholder="Busca un artículo" (ionInput)="getItems($event)" (ionClear)="resetArticles()">
   </ion-searchbar>
   <ion-icon slot=end name="filter-sharp" (click)="openSelect()"></ion-icon>
 </ion-item>
@@ -83,8 +83,9 @@
     <ion-row>
       <ion-col class=center-align>
         <ion-button color=dark (click)="giveLike(art)">
+          <!-- En un futuro el color del like dependerá de si el id de usuario se encuentra en los existentes. -->
           <ion-icon slot="start" name="thumbs-up"></ion-icon>
-          {{art.likes}} Likes
+          {{art.likes.length}} Likes
         </ion-button>
       </ion-col>
       <ion-col class=center-align>
@@ -94,7 +95,7 @@
           <!-- {{art.comentarios.length}} Transformar esto en otra petición. -->
         </ion-button>
       </ion-col>
-      <ion-col class=center-align>
+      <ion-col class=center-align (click)="share()">
         <ion-button color=dark>
           <ion-icon slot="start" name="share-social-outline"></ion-icon>
           Compartir
